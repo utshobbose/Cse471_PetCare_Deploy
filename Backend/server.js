@@ -7,7 +7,7 @@ const productRoutes = require('./routes/ProductRoutes');
 //const galleryRoutes = require('./routes/galleryRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const cartRoute = require('./routes/cartRoute');
-const orderRoutes = require('./routes/orderRoutes');
+// const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
@@ -30,7 +30,7 @@ connectDB();
 app.use('/', authRoutes);
 app.use('/products', productRoutes);
 app.use('/cart', cartRoute);
-app.use('/orders', orderRoutes);
+// app.use('/orders', orderRoutes);
 app.use('/payment', paymentRoutes);
 //app.use('/gallery', galleryRoutes);
 app.use('/pets', profileRoutes);
