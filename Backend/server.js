@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require("cors");
+const stripSlash = (url) => (url ? url.replace(/\/+$/, '') : url);
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/ProductRoutes');
 //const galleryRoutes = require('./routes/galleryRoutes');
@@ -22,24 +23,28 @@ const PORT = process.env.PORT || 1782;
 // );
 // app.use(express.json());
 
-const allowlist = [
-  process.env.CLIENT_ORIGIN,        // prod vercel url
-  'http://localhost:5173',          // local vite dev
-];
-console.log('CORS allow origin:', process.env.CLIENT_ORIGIN);
+const allowed = new Set([
+  stripSlash(process.env.CLIENT_ORIGIN), // prod Vercel origin
+  'http://localhost:5173',               // local dev
+]);
+
+console.log('CORS allow origin:', stripSlash(process.env.CLIENT_ORIGIN));
 
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin) return cb(null, true); // allow curl, mobile apps, etc.
-    if (allowlist.includes(origin)) return cb(null, true);
-    return cb(new Error('Not allowed by CORS'));
+    if (!origin) return cb(null, true);      // allow non-browser clients
+    const o = stripSlash(origin);
+    if (allowed.has(o)) return cb(null, true);
+    return cb(new Error(`Not allowed by CORS: ${origin}`));
   },
   credentials: true,
 }));
 
-
+// make sure preflights succeed
 app.options('*', cors());
 
+// parse JSON (you had this commented out — you need it!)
+app.use(express.json());
 
 // Connect to MongoDB
 connectDB();
