@@ -28,10 +28,13 @@ export default function ContactPage() {
     // Send email using EmailJS
     emailjs
       .send(
-        "service_uiek2pn", // EmailJS Service ID (Create in EmailJS dashboard)
-        "template_jev191q", // EmailJS Template ID (Create in EmailJS dashboard)
+        // eslint-disable-next-line no-undef
+        VITE_EMAILJS_SERVICE, // EmailJS Service ID (Create in EmailJS dashboard)
+        // eslint-disable-next-line no-undef
+        VITE_EMAILJS_TEMPLATE, // EmailJS Template ID (Create in EmailJS dashboard)
         formData, // The form data that you want to send
-        "xM8khpaPLWAT4tx1C" // Your EmailJS user ID
+        // eslint-disable-next-line no-undef
+        VITE_EMAILJS_PUBLIC // Your EmailJS user ID
       )
       .then(
         (response) => {
