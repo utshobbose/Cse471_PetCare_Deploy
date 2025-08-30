@@ -13,14 +13,33 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const app = express();
 const PORT = process.env.PORT || 1782;
 
+// || 'http://localhost:5173'
+// app.use(
+//   cors({
+//     origin: process.env.CLIENT_ORIGIN ,
+//     credentials: true,
+//   })
+// );
+// app.use(express.json());
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
-    credentials: true,
-  })
-);
-app.use(express.json());
+const allowlist = [
+  process.env.CLIENT_ORIGIN,        // prod vercel url
+  'http://localhost:5173',          // local vite dev
+];
+console.log('CORS allow origin:', process.env.CLIENT_ORIGIN);
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin) return cb(null, true); // allow curl, mobile apps, etc.
+    if (allowlist.includes(origin)) return cb(null, true);
+    return cb(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
+
+
+app.options('*', cors());
+
 
 // Connect to MongoDB
 connectDB();
