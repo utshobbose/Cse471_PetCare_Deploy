@@ -51,18 +51,20 @@ connectDB();
 
 
 // API Routes
-app.use('/', authRoutes);
-app.use('/products', productRoutes);
-app.use('/cart', cartRoute);
-// app.use('/orders', orderRoutes);
-app.use('/payment', paymentRoutes);
-//app.use('/gallery', galleryRoutes);
-app.use('/pets', profileRoutes);
+// app.use('/', authRoutes);
+// app.use('/products', productRoutes);
+// app.use('/cart', cartRoute);
+// // app.use('/orders', orderRoutes);
+// app.use('/payment', paymentRoutes);
+// //app.use('/gallery', galleryRoutes);
+// app.use('/pets', profileRoutes);
+
+app.get('/', (req, res) => res.send('OK'));
 
 // Test route
-app.get('/', (req, res) => {
-  res.send('PetCare Management System Backend is running');
-});
+// app.get('/', (req, res) => {
+//   res.send('PetCare Management System Backend is running');
+// });
 
 // Start server
 app.listen(PORT, () => {
