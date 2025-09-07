@@ -8,7 +8,7 @@ const productRoutes = require('./routes/ProductRoutes');
 // const galleryRoutes = require('./routes/galleryRoutes');
 //const profileRoutes = require('./routes/profileRoutes');
 const cartRoute = require('./routes/cartRoute');
-const orderRoutes = require('./routes/orderRoutes');
+//const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
