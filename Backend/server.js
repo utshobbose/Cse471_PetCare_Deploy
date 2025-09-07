@@ -3,13 +3,13 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require("cors");
 const stripSlash = (url) => (url ? url.replace(/\/+$/, '') : url);
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/ProductRoutes');
-//const galleryRoutes = require('./routes/galleryRoutes');
-const profileRoutes = require('./routes/profileRoutes');
-const cartRoute = require('./routes/cartRoute');
+//const authRoutes = require('./routes/authRoutes');
+//const productRoutes = require('./routes/ProductRoutes');
+// const galleryRoutes = require('./routes/galleryRoutes');
+//const profileRoutes = require('./routes/profileRoutes');
+//const cartRoute = require('./routes/cartRoute');
 // const orderRoutes = require('./routes/orderRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
+//const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 1782;
@@ -58,6 +58,27 @@ connectDB();
 // app.use('/payment', paymentRoutes);
 // //app.use('/gallery', galleryRoutes);
 // app.use('/pets', profileRoutes);
+
+console.log('loading authRoutes');
+const authRoutes = require('./routes/authRoutes');
+console.log('loaded authRoutes');
+
+console.log('loading productRoutes');
+const productRoutes = require('./routes/ProductRoutes');
+console.log('loaded productRoutes');
+
+console.log('loading cartRoute');
+const cartRoute = require('./routes/cartRoute');
+console.log('loaded cartRoute');
+
+console.log('loading paymentRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+console.log('loaded paymentRoutes');
+
+console.log('loading profileRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+console.log('loaded profileRoutes');
+
 
 app.get('/', (req, res) => res.send('OK'));
 
