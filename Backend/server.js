@@ -41,7 +41,7 @@ app.use(cors({
 }));
 
 // make sure preflights succeed
-app.options('*', cors());
+//app.options('*', cors());
 
 // parse JSON (you had this commented out — you need it!)
 app.use(express.json());
